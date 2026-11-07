@@ -1,6 +1,9 @@
 # Changelog
 
-## 0.2.0 - 2026-11-07
+## 1.0.0 - 2026-11-07
+
+Primera release estable del cliente AstroBookings. El alcance funcional
+definido en el PRD está implementado y verificado.
 
 ### Added
 
