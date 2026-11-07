@@ -9,6 +9,7 @@
     ".agents/prompts": true
   },
   "chat.useAgentsMdFile": true,
+  "chat.customAgentInSubagent.enabled": true,
   "material-icon-theme.files.associations": {
     "AGENTS.md": "contributing",
     "*.briefing.md": "apiblueprint",

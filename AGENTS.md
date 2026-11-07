@@ -36,6 +36,19 @@ npm run test:e2e
 Use the scripts defined in `package.json` when they are available. Run the
 smallest relevant test command after each code change.
 
+Architecture and delivery guidance is documented in `project/PRD.md`,
+`project/ADD.md`, and `project/ERM.md`. Implement backlog items from
+`project/specs/` using their corresponding plans in `project/plans/`. Confirm
+the AstroBookings API contract in `project/api-contract.md` before introducing
+endpoint names or customer identity behavior.
+
+The integration API is available at `http://localhost:3000`. Before integration
+or end-to-end tests, verify `http://localhost:3000/health`. If it is not
+running, use the backend repository at
+`C:\Users\Ana\reposGithub\astro-bookings-demo` and run `npm install`,
+`npm run build`, and `npm start`. The API is in-memory and resets when
+restarted.
+
 ## Folder Structure
 
 ```text

@@ -25,6 +25,12 @@ The application will consume the AstroBookings API directly from the browser.
 Authentication, persistence, and production security are outside the initial
 exercise scope unless the implementation explicitly adds them.
 
+The API source is the local repository
+`C:\Users\Ana\reposGithub\astro-bookings-demo`. Its integration contract and
+local build/start procedure are documented in
+[api-contract.md](./api-contract.md). Integration and end-to-end validation
+must compile and start that API locally first.
+
 ## Planned source structure
 
 ```text
