@@ -39,12 +39,14 @@ cliente de prueba, incluyendo misión, plazas, estado y precio total.
 ### Release 0.2.0
 
 Esta versión incluye el catálogo de lanzamientos, el flujo de reserva y el
-historial de reservas integrado con la API de AstroBookings.
+historial de reservas integrado con la API de AstroBookings. También incluye
+la vista de detalle de confirmación de cada reserva, accesible desde
+`/bookings/:bookingId`.
 
 Verificación realizada:
 
 - `npm run build`
-- `npm run test:unit` (16 tests)
+- `npm run test:unit` (18 tests)
 - `npm run test:e2e` (11 tests)
 
 ### Desarrollo

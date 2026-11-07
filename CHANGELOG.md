@@ -40,3 +40,11 @@
 - Added booking, launch, seat count, status, and total price details.
 - Added loading, empty, API error, and retry states.
 - Added unit and Playwright coverage for booking history.
+
+### Booking confirmation detail
+
+- Added the addressable `/bookings/:bookingId` confirmation view.
+- Added booking detail retrieval through `GET /api/bookings/:id`.
+- Added booking status, payment status, mission, seats, total, and timestamps.
+- Added loading, API error, retry, and history navigation states.
+- Added unit and Playwright coverage for booking confirmation details.

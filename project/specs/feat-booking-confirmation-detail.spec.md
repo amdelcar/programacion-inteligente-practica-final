@@ -42,17 +42,23 @@ is introduced.
 
 ## Acceptance Criteria
 
-- [ ] When a customer navigates to `/bookings/:bookingId`, the system shall
+- [x] When a customer navigates to `/bookings/:bookingId`, the system shall
   request `GET /api/bookings/:id` and show a loading state until the response
   resolves.
-- [ ] When the API returns a booking, the system shall display its identifier,
+- [x] When the API returns a booking, the system shall display its identifier,
   mission, seat count, total price, booking status, payment status, and created
   and updated timestamps.
-- [ ] If the API request fails, the system shall show an accessible error and a
+- [x] If the API request fails, the system shall show an accessible error and a
   retry control that retries the same booking.
-- [ ] When a customer selects the history navigation, the system shall navigate
+- [x] When a customer selects the history navigation, the system shall navigate
   to `/bookings`.
-- [ ] When a customer opens a history booking link, the system shall navigate
+- [x] When a customer opens a history booking link, the system shall navigate
   to the corresponding detail route without relying on mutation state.
-- [ ] The adapter shall reject non-successful or invalid responses with a typed
+- [x] The adapter shall reject non-successful or invalid responses with a typed
   booking result boundary consistent with existing API functions.
+
+## Verification
+
+- `npm run build`
+- `npm run test:unit` (18 tests)
+- `npm run test:e2e` (11 tests)
