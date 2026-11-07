@@ -36,15 +36,17 @@ su estado. El flujo usa el cliente de prueba
 La sección **My bookings** consulta y muestra el historial de reservas del
 cliente de prueba, incluyendo misión, plazas, estado y precio total.
 
-### Release 0.2.0
+### Release 1.0.0
 
-Esta versión incluye el catálogo de lanzamientos, el flujo de reserva y el
-historial de reservas integrado con la API de AstroBookings.
+Esta versión establece la primera release completa del cliente AstroBookings.
+Incluye el catálogo de lanzamientos, el flujo de reserva, el historial de
+reservas y la vista de detalle de confirmación accesible desde
+`/bookings/:bookingId`.
 
 Verificación realizada:
 
 - `npm run build`
-- `npm run test:unit` (16 tests)
+- `npm run test:unit` (18 tests)
 - `npm run test:e2e` (11 tests)
 
 ### Desarrollo

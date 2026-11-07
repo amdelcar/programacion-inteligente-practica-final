@@ -13,6 +13,28 @@
   display: flex;
 }
 
+.confirmation-card {
+  max-width: 760px;
+  padding: 1.5rem;
+  border: 1px solid #dfe5ef;
+  border-radius: 0.75rem;
+  background: #fff;
+  box-shadow: 0 8px 24px rgb(42 56 92 / 5%);
+}
+
+.booking-detail-table {
+  margin: 0;
+}
+
+.booking-detail-table th[scope='row'] {
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.booking-detail-table td {
+  text-transform: capitalize;
+}
+
 .site-header,
 .section-heading {
   justify-content: space-between;

@@ -1,10 +1,12 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useState, type FormEvent } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { createBooking, getLaunch } from '../api/astrobookings-api'
+import { createBooking, getBooking, getLaunch } from '../api/astrobookings-api'
 import { Feedback } from '../components/feedback'
 import { DEFAULT_CUSTOMER_EMAIL } from '../config/customer'
 import { validateSeatCount } from '../features/bookings/booking-validation'
+import type { Booking } from '../types/astrobookings'
+import { formatDate, formatPrice } from '../utils/formatters'
 
 export function BookingFlowPage() {
   const { launchId = '' } = useParams()
@@ -127,12 +129,98 @@ export function BookingFlowPage() {
 }
 
 export function BookingConfirmationPage() {
+  const { bookingId } = useParams()
+  const bookingQuery = useQuery({
+    queryKey: ['booking', bookingId],
+    queryFn: () => getBooking(bookingId ?? ''),
+    enabled: Boolean(bookingId),
+    retry: false,
+  })
+
+  if (!bookingId) {
+    return (
+      <section className="feedback" aria-labelledby="confirmation-heading">
+        <h2 id="confirmation-heading">Booking confirmation</h2>
+        <p>Open a booking from your history to view its confirmation.</p>
+        <Link to="/bookings">View my bookings</Link>
+      </section>
+    )
+  }
+
+  if (bookingQuery.isPending) {
+    return <Feedback message="Loading booking confirmation..." />
+  }
+
+  if (bookingQuery.isError) {
+    return (
+      <Feedback
+        message="We could not load this booking from the API."
+        actionLabel="Try again"
+        onAction={() => void bookingQuery.refetch()}
+      />
+    )
+  }
+
+  const booking = bookingQuery.data
   return (
-    <section className="feedback">
-      <h2>Booking confirmation</h2>
-      <p>Your booking status appears here.</p>
-      <Link to="/bookings">View my bookings</Link>
+    <section aria-labelledby="confirmation-heading">
+      <div className="section-heading">
+        <div>
+          <p className="eyebrow">BOOKING CONFIRMATION</p>
+          <h2 id="confirmation-heading">{booking.rocketName}</h2>
+        </div>
+        <Link to="/bookings">Back to my bookings</Link>
+      </div>
+      <div className="confirmation-card">
+        <BookingDetailsTable booking={booking} />
+      </div>
     </section>
+  )
+}
+
+interface BookingDetailsTableProps {
+  booking: Booking
+}
+
+interface BookingDetailRow {
+  label: string
+  value: string | number
+}
+
+function BookingDetailsTable({ booking }: BookingDetailsTableProps) {
+  const details: BookingDetailRow[] = [
+    { label: 'Booking ID', value: booking.id },
+    { label: 'Mission', value: booking.rocketName },
+    { label: 'Booking status', value: booking.status },
+    { label: 'Payment status', value: booking.paymentStatus },
+    { label: 'Seats', value: booking.seatCount },
+    { label: 'Total price', value: formatPrice(booking.totalPrice) },
+    { label: 'Booked', value: formatDate(booking.createdAt) },
+    { label: 'Last updated', value: formatDate(booking.updatedAt) },
+  ]
+
+  return (
+    <div className="table-container">
+      <table className="booking-detail-table">
+        <caption className="visually-hidden">
+          Details for booking {booking.id}
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">Detail</th>
+            <th scope="col">Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          {details.map(({ label, value }) => (
+            <tr key={label}>
+              <th scope="row">{label}</th>
+              <td>{value}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   )
 }
 

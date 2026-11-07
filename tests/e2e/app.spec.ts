@@ -32,6 +32,7 @@ test.describe('booking history', () => {
         contentType: 'application/json',
         body: JSON.stringify([booking()]),
       })
+
     })
     await page.goto('/bookings')
 
@@ -39,6 +40,56 @@ test.describe('booking history', () => {
     await expect(page.getByText('Test Falcon')).toBeVisible()
     await expect(page.getByText('confirmed')).toBeVisible()
     await expect(page.getByText('€9,998.00')).toBeVisible()
+  })
+
+  test.describe('booking confirmation detail', () => {
+    test('displays booking details and returns to history', async ({ page }) => {
+      await page.route('**/api/bookings/booking-1', async (route) => {
+        await route.fulfill({
+          status: 200,
+          contentType: 'application/json',
+          body: JSON.stringify(booking()),
+        })
+      })
+      await page.goto('/bookings/booking-1')
+
+      await expect(page.getByRole('heading', { name: 'Test Falcon' })).toBeVisible()
+      await expect(
+        page.getByRole('row', { name: 'Booking ID booking-1' }),
+      ).toBeVisible()
+      await expect(page.getByText('completed')).toBeVisible()
+      await expect(page.getByText('2', { exact: true })).toBeVisible()
+      await expect(page.getByText('€9,998.00')).toBeVisible()
+      await expect(page.getByText('Nov 7, 2026')).toHaveCount(2)
+
+      await page.getByRole('link', { name: 'Back to my bookings' }).click()
+      await expect(page).toHaveURL(/\/bookings$/)
+    })
+
+    test('offers retry after a detail API error', async ({ page }) => {
+      let requestCount = 0
+      await page.route('**/api/bookings/booking-2', async (route) => {
+        requestCount += 1
+        if (requestCount === 1) {
+          await route.fulfill({ status: 503, body: 'unavailable' })
+          return
+        }
+        await route.fulfill({
+          status: 200,
+          contentType: 'application/json',
+          body: JSON.stringify(booking({ id: 'booking-2' })),
+        })
+      })
+      await page.goto('/bookings/booking-2')
+
+      await expect(
+        page.getByText('We could not load this booking from the API.'),
+      ).toBeVisible()
+      await page.getByRole('button', { name: 'Try again' }).click()
+      await expect(
+        page.getByRole('row', { name: 'Booking ID booking-2' }),
+      ).toBeVisible()
+    })
   })
 
   test('shows an empty state', async ({ page }) => {

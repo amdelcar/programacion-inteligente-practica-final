@@ -1,6 +1,7 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import {
   createBooking,
+  getBooking,
   getBookingsByCustomer,
   getLaunch,
   getLaunches,
@@ -79,6 +80,26 @@ describe('getLaunches', () => {
     ).resolves.toEqual(bookings)
     expect(fetch).toHaveBeenCalledWith(
       '/api/bookings/customer/test.customer%40astrobookings.local',
+    )
+  })
+
+  it('gets one booking by encoded identifier', async () => {
+    const booking = { id: 'booking/1', status: 'confirmed' }
+    vi.spyOn(globalThis, 'fetch').mockResolvedValue(
+      new Response(JSON.stringify(booking), { status: 200 }),
+    )
+
+    await expect(getBooking('booking/1')).resolves.toEqual(booking)
+    expect(fetch).toHaveBeenCalledWith('/api/bookings/booking%2F1')
+  })
+
+  it('rejects an invalid individual booking response', async () => {
+    vi.spyOn(globalThis, 'fetch').mockResolvedValue(
+      new Response('', { status: 200 }),
+    )
+
+    await expect(getBooking('booking-1')).rejects.toThrow(
+      'AstroBookings API returned an invalid booking response',
     )
   })
 

@@ -25,7 +25,9 @@ export function BookingHistoryPage() {
           </span>
         )}
       </div>
-      {bookingsQuery.isPending && <Feedback message="Loading your bookings..." />}
+      {bookingsQuery.isPending && (
+        <Feedback message="Loading your bookings..." />
+      )}
       {bookingsQuery.isError && (
         <Feedback
           message="We could not load your bookings from the API."

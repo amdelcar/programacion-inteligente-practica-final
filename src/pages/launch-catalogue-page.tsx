@@ -41,7 +41,9 @@ export function LaunchCataloguePage() {
       {launchesQuery.isSuccess && launchesQuery.data.length > 0 && (
         <div className="table-container">
           <table className="launch-table">
-            <caption className="visually-hidden">Available rocket launches</caption>
+            <caption className="visually-hidden">
+              Available rocket launches
+            </caption>
             <thead>
               <tr>
                 <th scope="col">Mission</th>
@@ -49,7 +51,9 @@ export function LaunchCataloguePage() {
                 <th scope="col">Status</th>
                 <th scope="col">Price</th>
                 <th scope="col">Availability</th>
-                <th scope="col"><span className="visually-hidden">Actions</span></th>
+                <th scope="col">
+                  <span className="visually-hidden">Actions</span>
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -102,7 +106,10 @@ function LaunchRow({ launch }: LaunchRowProps) {
             View details
           </Link>
         ) : (
-          <span className="card-action card-action-disabled" aria-disabled="true">
+          <span
+            className="card-action card-action-disabled"
+            aria-disabled="true"
+          >
             Fully booked
           </span>
         )}
