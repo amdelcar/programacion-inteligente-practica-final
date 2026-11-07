@@ -17,7 +17,8 @@ currently uses the API's email-based customer flow with a test customer.
 
 Authentication, payment, administration, offline operation, and production
 security are out of scope. Persistent booking history and a detailed
-confirmation view remain planned work.
+confirmation view are separate concerns; persistent client-side booking history
+remains out of scope, while the confirmation detail is tracked in FR7.
 
 ## Functional Requirements
 
@@ -44,6 +45,11 @@ confirmation view remain planned work.
 ### FR6 Recoverable states
 - The client shall provide accessible loading, empty, API-error, validation-error, and retry states for the launch and booking journeys.
 - **Status**: Implemented
+
+### FR7 Booking confirmation detail
+- The client shall provide a booking detail view at `/bookings/:bookingId` that retrieves the reservation from `GET /api/bookings/:id` and displays its identifier, booking status, payment status, mission, seat count, total price, and relevant timestamps.
+- The view shall provide accessible loading, API-error, and retry states, and shall offer navigation back to the customer's booking history.
+- **Status**: NotStarted
 
 ## Technical Requirements
 

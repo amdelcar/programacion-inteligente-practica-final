@@ -52,18 +52,21 @@ with changed availability.
 
 The application uses feature-oriented modules with a thin composition root:
 
-- `api/`: typed transport functions, API error normalization, and environment configuration.
+- `api/`: typed transport functions, API error normalization, and environment configuration. The booking adapter exposes both customer history and individual booking lookup through `GET /api/bookings/customer/:email` and `GET /api/bookings/:id`.
 - `types/`: transport and domain types shared across features.
 - `features/launches/`: launch queries, cards/detail presentation, and availability rules.
-- `features/bookings/`: booking mutation, confirmation/status, and history query/presentation.
+- `features/bookings/`: booking mutation, confirmation/status, individual booking detail, and history query/presentation.
 - `pages/`: route-level composition and page state handling.
 - `components/`: reusable layout, feedback, form, and accessibility primitives.
 - `App.tsx`: providers and route configuration.
 
-Data flows from query hooks into presentational components. Mutations invalidate
-launch and booking queries after a successful response. Forms own transient
-input validation; API errors are normalized by the adapter and rendered by
-feature-level error states. No component calls `fetch` directly.
+Data flows from query hooks into presentational components. The booking detail
+route uses the `['booking', bookingId]` query key and reads the API as the
+source of truth, so direct navigation and page refreshes work without relying
+on mutation state. Mutations invalidate launch and booking queries after a
+successful response. Forms own transient input validation; API errors are
+normalized by the adapter and rendered by feature-level error states. No
+component calls `fetch` directly.
 
 ## Architecture Decision Record
 
@@ -84,3 +87,9 @@ feature-level error states. No component calls `fetch` directly.
 - **Status**: Accepted
 - **Context**: The API accepts `customerEmail` when creating bookings and exposes customer and booking-history endpoints by email.
 - **Consequences**: The initial client can implement customer selection by email without authentication; the API contract remains the source of truth.
+
+### ADR 4: Load booking details by route identifier
+- **Decision**: The booking confirmation route loads the reservation through a dedicated typed adapter function and TanStack Query key using the `bookingId` route parameter.
+- **Status**: Accepted
+- **Context**: Booking history links and post-booking confirmation can be opened directly or refreshed, while mutation state is transient and cannot be the source of truth for a detail page.
+- **Consequences**: The confirmation view works independently of navigation history and receives consistent loading, API-error, retry, and stale-data behavior. The API remains authoritative for booking and payment status.
