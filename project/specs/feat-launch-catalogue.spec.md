@@ -1,6 +1,6 @@
 # Launch Catalogue
 - **Type**: feat
-- **Status**: Planned
+- **Status**: Implemented
 
 ## Problem Description
 
@@ -31,8 +31,8 @@ catalogue data locally.
 
 ## Acceptance Criteria
 
-- [ ] THE AstroBookings Client SHALL display each API launch with its rocket, price, and available-seat count.
-- [ ] WHEN the launch request is pending THE AstroBookings Client SHALL display a loading state.
-- [ ] WHEN the API returns no launches THE AstroBookings Client SHALL display an empty state.
-- [ ] IF the launch request fails THEN THE AstroBookings Client SHALL display an error message and a retry action.
-- [ ] WHEN a launch has zero available seats THE AstroBookings Client SHALL identify it as unavailable for booking.
+- [x] THE AstroBookings Client SHALL display each API launch with its rocket, price, and available-seat count.
+- [x] WHEN the launch request is pending THE AstroBookings Client SHALL display a loading state.
+- [x] WHEN the API returns no launches THE AstroBookings Client SHALL display an empty state.
+- [x] IF the launch request fails THEN THE AstroBookings Client SHALL display an error message and a retry action.
+- [x] WHEN a launch has zero available seats THE AstroBookings Client SHALL identify it as unavailable for booking.

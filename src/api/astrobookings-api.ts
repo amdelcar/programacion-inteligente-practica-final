@@ -9,5 +9,26 @@ export async function getLaunches(): Promise<LaunchWithAvailability[]> {
     throw new Error(`AstroBookings API returned ${response.status}`)
   }
 
-  return (await response.json()) as LaunchWithAvailability[]
+  const payload: unknown = await response.json()
+
+  if (Array.isArray(payload)) {
+    return payload as LaunchWithAvailability[]
+  }
+
+  if (isLaunchCollection(payload)) {
+    return payload.value
+  }
+
+  throw new Error('AstroBookings API returned an invalid launches response')
+}
+
+function isLaunchCollection(
+  payload: unknown,
+): payload is { value: LaunchWithAvailability[] } {
+  return (
+    typeof payload === 'object' &&
+    payload !== null &&
+    'value' in payload &&
+    Array.isArray(payload.value)
+  )
 }

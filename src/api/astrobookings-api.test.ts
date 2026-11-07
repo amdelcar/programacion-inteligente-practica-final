@@ -9,7 +9,7 @@ describe('getLaunches', () => {
   it('returns launches from the AstroBookings API', async () => {
     const launches = [{ id: 'launch-1', availableSeats: 10 }]
     vi.spyOn(globalThis, 'fetch').mockResolvedValue(
-      new Response(JSON.stringify(launches), { status: 200 }),
+      new Response(JSON.stringify({ value: launches, Count: 1 }), { status: 200 }),
     )
 
     await expect(getLaunches()).resolves.toEqual(launches)
@@ -23,6 +23,16 @@ describe('getLaunches', () => {
 
     await expect(getLaunches()).rejects.toThrow(
       'AstroBookings API returned 503',
+    )
+  })
+
+  it('rejects an invalid launches response', async () => {
+    vi.spyOn(globalThis, 'fetch').mockResolvedValue(
+      new Response(JSON.stringify({ value: 'not-a-list' }), { status: 200 }),
+    )
+
+    await expect(getLaunches()).rejects.toThrow(
+      'AstroBookings API returned an invalid launches response',
     )
   })
 })

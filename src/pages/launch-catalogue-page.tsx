@@ -2,11 +2,13 @@ import { useQuery } from '@tanstack/react-query'
 import { Link } from 'react-router-dom'
 import { getLaunches } from '../api/astrobookings-api'
 import { Feedback } from '../components/feedback'
+import { hasAvailableSeats } from '../features/launches/launch-availability'
 
 export function LaunchCataloguePage() {
   const launchesQuery = useQuery({
     queryKey: ['launches'],
     queryFn: getLaunches,
+    retry: false,
   })
 
   return (
@@ -64,13 +66,22 @@ export function LaunchCataloguePage() {
                   </td>
                   <td className="table-number">{formatPrice(launch.price)}</td>
                   <td>
+                    <span className={`availability-badge ${hasAvailableSeats(launch) ? 'availability-open' : 'availability-full'}`}>
+                      {hasAvailableSeats(launch) ? 'Available' : 'Unavailable'}
+                    </span>
                     <span className="availability-count">{launch.availableSeats}</span>
                     <span className="availability-label"> seats</span>
                   </td>
                   <td className="table-action">
-                    <Link className="card-action" to={`/launches/${launch.id}`}>
-                      View details
-                    </Link>
+                    {hasAvailableSeats(launch) ? (
+                      <Link className="card-action" to={`/launches/${launch.id}`}>
+                        View details
+                      </Link>
+                    ) : (
+                      <span className="card-action card-action-disabled" aria-disabled="true">
+                        Fully booked
+                      </span>
+                    )}
                   </td>
                 </tr>
               ))}
