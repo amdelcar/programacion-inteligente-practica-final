@@ -33,3 +33,10 @@
 - Added pending, success, and API rejection states.
 - Added query invalidation to refresh launch availability after booking.
 - Added unit and Playwright coverage for booking validation and API conflicts.
+
+### Booking history
+
+- Added customer booking history through `GET /api/bookings/customer/:email`.
+- Added booking, launch, seat count, status, and total price details.
+- Added loading, empty, API error, and retry states.
+- Added unit and Playwright coverage for booking history.

@@ -33,6 +33,9 @@ La reserva valida la disponibilidad, crea la reserva mediante la API y muestra
 su estado. El flujo usa el cliente de prueba
 `test.customer@astrobookings.local` mientras no exista autenticación.
 
+La sección **My bookings** consulta y muestra el historial de reservas del
+cliente de prueba, incluyendo misión, plazas, estado y precio total.
+
 ### Desarrollo
 
 ```bash

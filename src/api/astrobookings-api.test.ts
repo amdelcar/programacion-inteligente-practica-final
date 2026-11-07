@@ -1,5 +1,10 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
-import { createBooking, getLaunch, getLaunches } from './astrobookings-api'
+import {
+  createBooking,
+  getBookingsByCustomer,
+  getLaunch,
+  getLaunches,
+} from './astrobookings-api'
 
 describe('getLaunches', () => {
   afterEach(() => {
@@ -61,5 +66,31 @@ describe('getLaunches', () => {
       }),
     )
     await expect(getLaunch('launch-1')).rejects.toThrow('Insufficient seats available')
+  })
+
+  it('gets booking history for an encoded customer email', async () => {
+    const bookings = [{ id: 'booking-1', status: 'confirmed' }]
+    vi.spyOn(globalThis, 'fetch').mockResolvedValue(
+      new Response(JSON.stringify(bookings), { status: 200 }),
+    )
+
+    await expect(
+      getBookingsByCustomer('test.customer@astrobookings.local'),
+    ).resolves.toEqual(bookings)
+    expect(fetch).toHaveBeenCalledWith(
+      '/api/bookings/customer/test.customer%40astrobookings.local',
+    )
+  })
+
+  it('rejects an invalid booking history response', async () => {
+    vi.spyOn(globalThis, 'fetch').mockResolvedValue(
+      new Response(JSON.stringify({ value: [] }), { status: 200 }),
+    )
+
+    await expect(
+      getBookingsByCustomer('test.customer@astrobookings.local'),
+    ).rejects.toThrow(
+      'AstroBookings API returned an invalid booking history response',
+    )
   })
 })

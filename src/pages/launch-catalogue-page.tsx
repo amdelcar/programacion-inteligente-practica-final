@@ -4,6 +4,7 @@ import { getLaunches } from '../api/astrobookings-api'
 import { Feedback } from '../components/feedback'
 import { hasAvailableSeats } from '../features/launches/launch-availability'
 import type { LaunchWithAvailability } from '../types/astrobookings'
+import { formatDate, formatPrice } from '../utils/formatters'
 
 export function LaunchCataloguePage() {
   const launchesQuery = useQuery({
@@ -108,17 +109,4 @@ function LaunchRow({ launch }: LaunchRowProps) {
       </td>
     </tr>
   )
-}
-
-function formatDate(value: string) {
-  return new Intl.DateTimeFormat('en', { dateStyle: 'medium' }).format(
-    new Date(value),
-  )
-}
-
-function formatPrice(value: number) {
-  return new Intl.NumberFormat('en', {
-    style: 'currency',
-    currency: 'EUR',
-  }).format(value)
 }

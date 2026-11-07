@@ -34,6 +34,21 @@ export async function createBooking(
   return readResponse(response, 'booking')
 }
 
+export async function getBookingsByCustomer(
+  customerEmail: string,
+): Promise<Booking[]> {
+  const response = await fetch(
+    `${API_BASE_URL}/api/bookings/customer/${encodeURIComponent(customerEmail)}`,
+  )
+  const payload = await readResponse<unknown>(response, 'booking history')
+  if (!Array.isArray(payload)) {
+    throw new Error(
+      'AstroBookings API returned an invalid booking history response',
+    )
+  }
+  return payload as Booking[]
+}
+
 async function readResponse<T>(response: Response, resource: string): Promise<T> {
   const payload: unknown = await response.json().catch(() => undefined)
   if (!response.ok) {
