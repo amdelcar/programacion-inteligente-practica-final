@@ -22,8 +22,12 @@ La implementación elegida para este repositorio es una aplicación web con
 - [Project briefing and technology decision](./project/briefing.md)
 
 La aplicación usará TanStack Query para la gestión de datos, React Router para
-la navegación, Tailwind CSS para los estilos, Vitest para pruebas unitarias y
-Playwright para pruebas end-to-end.
+la navegación, Pico.css para los estilos base, Tailwind CSS para utilidades,
+Vitest para pruebas unitarias y Playwright para pruebas end-to-end.
+
+La primera entrega incluye el catálogo de lanzamientos, navegación entre las
+secciones principales, estados de carga/error/vacío y una interfaz responsive
+con tabla de lanzamientos.
 
 ### Desarrollo
 

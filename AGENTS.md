@@ -18,7 +18,8 @@ The API is fictional and intended for training and architecture practice.
 
 Keep implementation decisions aligned with `project/briefing.md`. Use the
 selected React + Vite + TypeScript stack, with TanStack Query for API data,
-React Router for navigation, and Tailwind CSS for styling.
+React Router for navigation, Pico.css for base styling, and Tailwind CSS for
+utilities.
 
 ```bash
 # Install dependencies
