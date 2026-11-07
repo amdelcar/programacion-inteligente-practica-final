@@ -1,65 +1,68 @@
 # AstroBookings Client Product Requirements Document
 
-AstroBookings Client is a web application for discovering rocket launches and
-booking seats through the fictional AstroBookings API.
+AstroBookings Client is a responsive React web application for discovering
+rocket launches and booking seats through the fictional AstroBookings API.
 
 ## Vision and Scope
 
-The client gives customers a clear, responsive way to browse available launches,
-submit a seat booking, and confirm or review booking status. It is an API
-consumer for training and architecture practice, not a replacement for the
-backend.
+The client gives customers a clear way to browse launches, understand current
+seat availability, submit a booking, and receive immediate booking feedback.
+It is an API consumer for training and architecture practice, not a replacement
+for the backend.
 
-Target users are customers choosing a launch and checking their bookings.
+The target users are customers choosing a launch and reviewing their bookings.
 The initial scope includes launch discovery, availability-aware booking,
-confirmation/status feedback, and booking history. Customer selection uses the
-API's email-based flow. Authentication, payment, administration, offline
-operation, and production security are out of scope.
+validation, booking status feedback, and recoverable UI states. The client
+currently uses the API's email-based customer flow with a test customer.
+
+Authentication, payment, administration, offline operation, and production
+security are out of scope. Persistent booking history and a detailed
+confirmation view remain planned work.
 
 ## Functional Requirements
 
 ### FR1 Launch catalogue
-- The client shall display API-provided launches with rocket, price, and available-seat details.
-- **Status**: NotStarted
+- The client shall display API-provided launches with rocket, date, status, price, and available-seat details, including loading, empty, error, retry, and fully-booked states.
+- **Status**: Implemented
 
 ### FR2 Launch selection and availability
-- The client shall let a customer inspect a launch and choose a requested seat quantity without allowing a quantity above current availability.
-- **Status**: NotStarted
+- The client shall let a customer open a launch, inspect its current availability, and choose a positive integer seat quantity no greater than the available seats.
+- **Status**: Implemented
 
 ### FR3 Booking submission
-- The client shall submit a valid booking to the AstroBookings API and prevent submission when the requested quantity is invalid.
-- **Status**: NotStarted
+- The client shall submit a valid booking through the AstroBookings API, prevent invalid submissions, and refresh affected launch availability after a successful or rejected request.
+- **Status**: Implemented
 
 ### FR4 Booking confirmation and status
-- The client shall show a clear pending, successful, or failed result after a booking request, including the booking status returned by the API.
-- **Status**: NotStarted
+- The client shall show pending, successful, or failed booking feedback and display the booking status and identifier returned by the API.
+- **Status**: Implemented
 
 ### FR5 Booking history
-- The client shall display the customer's API-provided bookings and their statuses.
+- The client shall retrieve and display the current customer's bookings, including their statuses and links to booking details.
 - **Status**: NotStarted
 
 ### FR6 Recoverable states
-- The client shall provide loading, empty, API-error, validation-error, and retry states for launch and booking views.
-- **Status**: NotStarted
+- The client shall provide accessible loading, empty, API-error, validation-error, and retry states for the launch and booking journeys.
+- **Status**: Implemented
 
 ## Technical Requirements
 
 ### TR1 Web stack
 - The client shall use React, Vite, and TypeScript with strict typing.
-- **Status**: NotStarted
+- **Status**: Implemented
 
 ### TR2 Data and navigation
 - The client shall use TanStack Query for API fetching, caching, mutation state, and invalidation, and React Router for route-level navigation.
-- **Status**: NotStarted
+- **Status**: Implemented
 
 ### TR3 Presentation
-- The client shall use Tailwind CSS and provide accessible semantic controls, labels, focus states, and responsive layouts.
-- **Status**: NotStarted
+- The client shall use Tailwind CSS and Pico.css as the styling foundation and provide semantic controls, accessible labels, focus states, and responsive layouts.
+- **Status**: Implemented
 
 ### TR4 Quality
-- Unit tests shall use Vitest and end-to-end tests shall use Playwright, covering business rules and primary customer journeys.
-- **Status**: NotStarted
+- Unit tests shall use Vitest and end-to-end tests shall use Playwright, covering business rules, API adaptation, and primary customer journeys.
+- **Status**: Implemented
 
 ### TR5 API boundary
-- All API communication shall pass through a typed client/adapter so UI components do not depend on transport details. The API base URL shall be configurable per environment.
-- **Status**: NotStarted
+- All API communication shall pass through a typed client adapter, and the API base URL shall be configurable per environment.
+- **Status**: Implemented
