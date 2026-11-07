@@ -1,6 +1,6 @@
 # Application Foundation
 - **Type**: chore
-- **Status**: Planned
+- **Status**: Implemented
 
 ## Problem Description
 
@@ -31,8 +31,8 @@ runtime environment.
 
 ## Acceptance Criteria
 
-- [ ] THE AstroBookings Client SHALL expose routes for launches, booking flow, confirmation, and booking history.
-- [ ] THE AstroBookings Client SHALL render a not-found state for an unknown route.
-- [ ] THE AstroBookings Client SHALL obtain API data only through typed adapter functions.
-- [ ] THE AstroBookings Client SHALL configure the API base URL without changing source code.
-- [ ] THE AstroBookings Client SHALL provide keyboard-accessible labels, focus states, and semantic controls.
+- [x] THE AstroBookings Client SHALL expose routes for launches, booking flow, confirmation, and booking history.
+- [x] THE AstroBookings Client SHALL render a not-found state for an unknown route.
+- [x] THE AstroBookings Client SHALL obtain API data only through typed adapter functions.
+- [x] THE AstroBookings Client SHALL configure the API base URL without changing source code.
+- [x] THE AstroBookings Client SHALL provide keyboard-accessible labels, focus states, and semantic controls.

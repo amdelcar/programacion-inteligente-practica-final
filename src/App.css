@@ -153,6 +153,14 @@ dd {
   color: #65708a;
 }
 
+.feedback h2 {
+  margin-bottom: 0.75rem;
+}
+
+.feedback p {
+  margin-bottom: 1rem;
+}
+
 .feedback-error {
   color: #a63d4d;
 }
