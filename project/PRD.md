@@ -49,7 +49,7 @@ remains out of scope, while the confirmation detail is tracked in FR7.
 ### FR7 Booking confirmation detail
 - The client shall provide a booking detail view at `/bookings/:bookingId` that retrieves the reservation from `GET /api/bookings/:id` and displays its identifier, booking status, payment status, mission, seat count, total price, and relevant timestamps.
 - The view shall provide accessible loading, API-error, and retry states, and shall offer navigation back to the customer's booking history.
-- **Status**: NotStarted
+- **Status**: Implemented
 
 ## Technical Requirements
 
