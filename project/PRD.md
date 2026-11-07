@@ -39,7 +39,7 @@ confirmation view remain planned work.
 
 ### FR5 Booking history
 - The client shall retrieve and display the current customer's bookings, including their statuses and links to booking details.
-- **Status**: NotStarted
+- **Status**: Implemented
 
 ### FR6 Recoverable states
 - The client shall provide accessible loading, empty, API-error, validation-error, and retry states for the launch and booking journeys.

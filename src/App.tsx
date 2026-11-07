@@ -3,9 +3,9 @@ import { AppLayout } from './components/app-layout'
 import {
   BookingConfirmationPage,
   BookingFlowPage,
-  BookingHistoryPage,
   NotFoundPage,
 } from './pages/placeholder-pages'
+import { BookingHistoryPage } from './pages/booking-history-page'
 import { LaunchCataloguePage } from './pages/launch-catalogue-page'
 
 export function App() {

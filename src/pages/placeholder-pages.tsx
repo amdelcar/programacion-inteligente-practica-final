@@ -3,9 +3,8 @@ import { useState, type FormEvent } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { createBooking, getLaunch } from '../api/astrobookings-api'
 import { Feedback } from '../components/feedback'
+import { DEFAULT_CUSTOMER_EMAIL } from '../config/customer'
 import { validateSeatCount } from '../features/bookings/booking-validation'
-
-const TEST_CUSTOMER_EMAIL = 'test.customer@astrobookings.local'
 
 export function BookingFlowPage() {
   const { launchId = '' } = useParams()
@@ -24,7 +23,7 @@ export function BookingFlowPage() {
     mutationFn: () =>
       createBooking({
         launchId,
-        customerEmail: TEST_CUSTOMER_EMAIL,
+        customerEmail: DEFAULT_CUSTOMER_EMAIL,
         seatCount: Number(seatCount),
       }),
     onSuccess: async (booking) => {
@@ -34,7 +33,7 @@ export function BookingFlowPage() {
         queryClient.invalidateQueries({ queryKey: ['launch', launchId] }),
         queryClient.invalidateQueries({ queryKey: ['launches'] }),
         queryClient.invalidateQueries({
-          queryKey: ['bookings', TEST_CUSTOMER_EMAIL],
+          queryKey: ['bookings', DEFAULT_CUSTOMER_EMAIL],
         }),
       ])
     },
@@ -133,16 +132,6 @@ export function BookingConfirmationPage() {
       <h2>Booking confirmation</h2>
       <p>Your booking status appears here.</p>
       <Link to="/bookings">View my bookings</Link>
-    </section>
-  )
-}
-
-export function BookingHistoryPage() {
-  return (
-    <section className="feedback">
-      <h2>My bookings</h2>
-      <p>Your booking history will appear here.</p>
-      <Link to="/">Browse launches</Link>
     </section>
   )
 }

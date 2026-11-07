@@ -1,6 +1,6 @@
 # Booking Status and History
 - **Type**: feat
-- **Status**: Planned
+- **Status**: Implemented
 
 ## Problem Description
 
@@ -31,8 +31,8 @@ permanent history.
 
 ## Acceptance Criteria
 
-- [ ] WHEN a booking is accepted THE AstroBookings Client SHALL show its identifier and API-provided status.
-- [ ] THE AstroBookings Client SHALL display each customer booking with its launch reference, seat count, and status.
-- [ ] WHEN the booking history request is pending THE AstroBookings Client SHALL display a loading state.
-- [ ] WHEN the customer has no bookings THE AstroBookings Client SHALL display an empty state.
-- [ ] IF the booking history request fails THEN THE AstroBookings Client SHALL display an error message and retry action.
+- [x] WHEN a booking is accepted THE AstroBookings Client SHALL show its identifier and API-provided status.
+- [x] THE AstroBookings Client SHALL display each customer booking with its launch reference, seat count, and status.
+- [x] WHEN the booking history request is pending THE AstroBookings Client SHALL display a loading state.
+- [x] WHEN the customer has no bookings THE AstroBookings Client SHALL display an empty state.
+- [x] IF the booking history request fails THEN THE AstroBookings Client SHALL display an error message and retry action.

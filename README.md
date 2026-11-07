@@ -33,6 +33,20 @@ La reserva valida la disponibilidad, crea la reserva mediante la API y muestra
 su estado. El flujo usa el cliente de prueba
 `test.customer@astrobookings.local` mientras no exista autenticación.
 
+La sección **My bookings** consulta y muestra el historial de reservas del
+cliente de prueba, incluyendo misión, plazas, estado y precio total.
+
+### Release 0.1.0
+
+Esta versión incluye el catálogo de lanzamientos, el flujo de reserva y el
+historial de reservas integrado con la API de AstroBookings.
+
+Verificación realizada:
+
+- `npm run build`
+- `npm run test:unit` (16 tests)
+- `npm run test:e2e` (11 tests)
+
 ### Desarrollo
 
 ```bash
