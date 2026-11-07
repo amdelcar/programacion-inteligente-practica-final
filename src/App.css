@@ -1,0 +1,184 @@
+#root {
+  min-height: 100vh;
+}
+
+.app-shell {
+  width: min(1120px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 3rem 0 5rem;
+}
+
+.site-header,
+.section-heading,
+.card-topline,
+.launch-details {
+  display: flex;
+}
+
+.site-header,
+.section-heading {
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.site-header {
+  align-items: end;
+  margin-bottom: 4rem;
+}
+
+.eyebrow {
+  margin: 0 0 0.75rem;
+  color: #4567d6;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin-top: 0;
+}
+
+h1 {
+  max-width: 650px;
+  margin-bottom: 1rem;
+  color: #10182b;
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  line-height: 0.98;
+  letter-spacing: -0.06em;
+}
+
+h2 {
+  margin-bottom: 0;
+  color: #10182b;
+  font-size: 2rem;
+  letter-spacing: -0.04em;
+}
+
+h3 {
+  margin-bottom: 1.75rem;
+  color: #10182b;
+  font-size: 1.4rem;
+}
+
+.intro {
+  max-width: 550px;
+  margin-bottom: 0;
+  color: #65708a;
+  font-size: 1.1rem;
+}
+
+nav {
+  display: flex;
+  gap: 1.25rem;
+}
+
+a {
+  color: #4567d6;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.section-heading {
+  align-items: end;
+  margin-bottom: 1.5rem;
+}
+
+.status {
+  color: #65708a;
+  font-size: 0.875rem;
+}
+
+.launch-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
+
+.launch-card {
+  display: flex;
+  min-height: 250px;
+  flex-direction: column;
+  padding: 1.5rem;
+  border: 1px solid #e0e6f0;
+  border-radius: 1rem;
+  background: white;
+  box-shadow: 0 12px 30px rgb(42 56 92 / 7%);
+}
+
+.card-topline {
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  color: #65708a;
+  font-size: 0.8rem;
+}
+
+.launch-status {
+  color: #21865b;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.launch-details {
+  gap: 1.5rem;
+  margin: 0 0 1.5rem;
+}
+
+dt {
+  color: #65708a;
+  font-size: 0.75rem;
+}
+
+dd {
+  margin: 0.25rem 0 0;
+  color: #10182b;
+  font-weight: 800;
+}
+
+.card-action {
+  margin-top: auto;
+}
+
+.feedback {
+  padding: 2rem;
+  border-radius: 1rem;
+  background: white;
+  color: #65708a;
+}
+
+.feedback-error {
+  color: #a63d4d;
+}
+
+button {
+  padding: 0.6rem 1rem;
+  border: 0;
+  border-radius: 0.5rem;
+  color: white;
+  background: #4567d6;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+@media (max-width: 700px) {
+  .app-shell {
+    padding-top: 2rem;
+  }
+
+  .site-header,
+  .section-heading {
+    align-items: start;
+    flex-direction: column;
+  }
+
+  .site-header {
+    margin-bottom: 3rem;
+  }
+}

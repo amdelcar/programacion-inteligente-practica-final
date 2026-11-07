@@ -27,8 +27,9 @@ npm run build
 npm start
 ```
 
-The client API base URL must be configurable by environment and default to
-`http://localhost:3000`.
+The client API base URL is configurable with `VITE_API_BASE_URL`. In local
+development, leave it empty so Vite proxies `/api` requests to
+`http://localhost:3000`; for a deployed client, set it to the API origin.
 
 ## API endpoints
 
@@ -74,6 +75,17 @@ Launch list responses include `rocketName`, `totalSeats`, `bookedSeats`, and
 The API validates launch dates, prices, rocket capacity, and launch status
 transitions. The client must surface API errors, including conflicts caused by
 stale availability.
+
+## Local test data
+
+The currently running API has test data ready for booking flows:
+
+- Customer email: `test.customer@astrobookings.local`
+- Active launch ID: `launch-1`
+- Available seats: `10`
+- Rocket: `Test Falcon`
+
+These records are in-memory and will disappear when the backend restarts.
 
 ## Validation workflow
 

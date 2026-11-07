@@ -25,6 +25,27 @@ La aplicación usará TanStack Query para la gestión de datos, React Router par
 la navegación, Tailwind CSS para los estilos, Vitest para pruebas unitarias y
 Playwright para pruebas end-to-end.
 
+### Desarrollo
+
+```bash
+npm install
+npm run dev
+```
+
+La aplicación usa el proxy de Vite para consumir la API desplegada en
+`http://localhost:3000`. Comprueba que `GET /health` responde antes de abrir
+la aplicación.
+
+La API local contiene datos de prueba para reservas: el cliente
+`test.customer@astrobookings.local` y el lanzamiento activo `launch-1`.
+Estos datos se reinician al reiniciar el backend.
+
+```bash
+npm run build
+npm run test:unit
+npm run test:e2e
+```
+
 ### Project workspace
 
 This repository includes the reusable agent workflows, prompts, and skills
