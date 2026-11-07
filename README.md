@@ -20,6 +20,13 @@ Incluso una aplicación de consola o web en Java o C#.
 
 - [Exercise project : Astro-Bookings-Client](./astrobookings-cli.briefing.md)
 
+### Project workspace
+
+This repository includes the reusable agent workflows, prompts, and skills
+under [`.agents/`](./.agents/), with project context in [`project/`](./project/)
+and workspace discovery configured in [`.vscode/settings.json`](./.vscode/settings.json).
+Read [`AGENTS.md`](./AGENTS.md) before making changes.
+
 Por supuesto, puedes desarrollarlo con cualquier herramienta de IA que te guste.
 - VSCode + GitHub Copilot
 - Cursor
@@ -35,5 +42,4 @@ Por supuesto, puedes desarrollarlo con cualquier herramienta de IA que te guste.
   - [X](https://x.com/albertobasalo)
   - [LinkedIn](https://www.linkedin.com/in/albertobasalo/)
   - [GitHub](https://github.com/albertobasalo)
-
 
