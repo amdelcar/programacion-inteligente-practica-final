@@ -15,10 +15,15 @@ API mínima en TypeScript y Express .
 
 ## Exercise project : Astro-Bookings-Client
 Aplicación cliente para interactuar con la API de Astro-Bookings.
-En cualquier lenguaje/framework de elección (e.g., React, Vue, Angular, o una CLI en Python/Node.js). 
-Incluso una aplicación de consola o web en Java o C#.
+La implementación elegida para este repositorio es una aplicación web con
+**React + Vite + TypeScript**.
 
 - [Exercise project : Astro-Bookings-Client](./astrobookings-cli.briefing.md)
+- [Project briefing and technology decision](./project/briefing.md)
+
+La aplicación usará TanStack Query para la gestión de datos, React Router para
+la navegación, Tailwind CSS para los estilos, Vitest para pruebas unitarias y
+Playwright para pruebas end-to-end.
 
 ### Project workspace
 
@@ -42,4 +47,3 @@ Por supuesto, puedes desarrollarlo con cualquier herramienta de IA que te guste.
   - [X](https://x.com/albertobasalo)
   - [LinkedIn](https://www.linkedin.com/in/albertobasalo/)
   - [GitHub](https://github.com/albertobasalo)
-

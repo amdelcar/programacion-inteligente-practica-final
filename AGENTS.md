@@ -9,26 +9,32 @@
 
 AstroBookings Client is an application that consumes the AstroBookings API.
 It lets users browse rocket launches, book available seats, and review booking
-status and history. The client may be implemented as a web application or a
-terminal application.
+status and history. It is implemented as a web application with React, Vite,
+and TypeScript.
 
 The API is fictional and intended for training and architecture practice.
 
 ## Development Workflow
 
-Keep the implementation language and framework aligned with the project
-briefing and document the chosen stack in `project/briefing.md`.
+Keep implementation decisions aligned with `project/briefing.md`. Use the
+selected React + Vite + TypeScript stack, with TanStack Query for API data,
+React Router for navigation, and Tailwind CSS for styling.
 
 ```bash
 # Install dependencies
-# Use the package manager required by the selected stack.
+npm install
 
 # Build and run
-# Use the commands documented by the selected stack.
+npm run build
+npm run dev
 
 # Test
-# Run the relevant unit and end-to-end tests after code changes.
+npm run test:unit
+npm run test:e2e
 ```
+
+Use the scripts defined in `package.json` when they are available. Run the
+smallest relevant test command after each code change.
 
 ## Folder Structure
 
@@ -42,7 +48,12 @@ briefing and document the chosen stack in `project/briefing.md`.
 |-- .vscode/              # VS Code workspace configuration
 |-- project/              # Project context and planning documents
 |   `-- briefing.md
-|-- src/                  # Application source code
+|-- src/                  # React application source code
+|   |-- api/              # API client and request helpers
+|   |-- components/       # Shared UI components
+|   |-- features/         # Launches, bookings, and customer features
+|   |-- pages/            # Route-level page components
+|   `-- types/            # API and domain types
 |-- tests/                # Automated tests
 |-- README.md             # Human-oriented documentation
 `-- astrobookings-cli.briefing.md
