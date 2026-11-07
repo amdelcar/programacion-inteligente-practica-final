@@ -1,5 +1,5 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
-import { getLaunches } from './astrobookings-api'
+import { createBooking, getLaunch, getLaunches } from './astrobookings-api'
 
 describe('getLaunches', () => {
   afterEach(() => {
@@ -34,5 +34,32 @@ describe('getLaunches', () => {
     await expect(getLaunches()).rejects.toThrow(
       'AstroBookings API returned an invalid launches response',
     )
+  })
+
+  it('creates a booking and surfaces API errors', async () => {
+    const booking = { id: 'booking-1', status: 'pending' }
+    vi.spyOn(globalThis, 'fetch').mockResolvedValue(
+      new Response(JSON.stringify(booking), { status: 201 }),
+    )
+    await expect(
+      createBooking({
+        launchId: 'launch-1',
+        customerEmail: 'test.customer@astrobookings.local',
+        seatCount: 2,
+      }),
+    ).resolves.toEqual(booking)
+    expect(fetch).toHaveBeenCalledWith(
+      '/api/bookings',
+      expect.objectContaining({ method: 'POST' }),
+    )
+  })
+
+  it('reads one launch and reports API rejection details', async () => {
+    vi.spyOn(globalThis, 'fetch').mockResolvedValue(
+      new Response(JSON.stringify({ error: 'Insufficient seats available' }), {
+        status: 400,
+      }),
+    )
+    await expect(getLaunch('launch-1')).rejects.toThrow('Insufficient seats available')
   })
 })

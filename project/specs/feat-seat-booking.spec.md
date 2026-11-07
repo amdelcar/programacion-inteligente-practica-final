@@ -1,6 +1,6 @@
 # Seat Booking
 - **Type**: feat
-- **Status**: Planned
+- **Status**: Complete
 
 ## Problem Description
 
@@ -33,9 +33,9 @@ customer booking queries; do not create a local booking record.
 
 ## Acceptance Criteria
 
-- [ ] THE AstroBookings Client SHALL provide a labelled seat quantity control for a selected launch.
-- [ ] IF the quantity is not a positive integer THEN THE AstroBookings Client SHALL prevent submission and display validation feedback.
-- [ ] IF the quantity exceeds displayed availability THEN THE AstroBookings Client SHALL prevent submission and display validation feedback.
-- [ ] WHILE a booking request is pending THE AstroBookings Client SHALL disable duplicate submission and show progress.
-- [ ] WHEN the API accepts a booking THE AstroBookings Client SHALL display the returned booking status.
-- [ ] IF the API rejects a booking because availability changed THEN THE AstroBookings Client SHALL display the rejection and current launch data after refresh.
+- [x] THE AstroBookings Client SHALL provide a labelled seat quantity control for a selected launch.
+- [x] IF the quantity is not a positive integer THEN THE AstroBookings Client SHALL prevent submission and display validation feedback.
+- [x] IF the quantity exceeds displayed availability THEN THE AstroBookings Client SHALL prevent submission and display validation feedback.
+- [x] WHILE a booking request is pending THE AstroBookings Client SHALL disable duplicate submission and show progress.
+- [x] WHEN the API accepts a booking THE AstroBookings Client SHALL display the returned booking status.
+- [x] IF the API rejects a booking because availability changed THEN THE AstroBookings Client SHALL display the rejection and current launch data after refresh.
