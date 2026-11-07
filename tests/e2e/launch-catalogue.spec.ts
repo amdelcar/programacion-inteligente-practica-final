@@ -14,13 +14,31 @@ const launch = (overrides: Record<string, unknown> = {}) => ({
   ...overrides,
 })
 
+const apiResponse = (body: unknown, status = 200) => ({
+  status,
+  contentType: 'application/json',
+  body: JSON.stringify(body),
+})
+
 async function mockLaunches(page: Page, launches: unknown[]) {
   await page.route('**/api/launches', async (route) => {
-    await route.fulfill({
-      status: 200,
-      contentType: 'application/json',
-      body: JSON.stringify({ value: launches, Count: launches.length }),
-    })
+    await route.fulfill(
+      apiResponse({ value: launches, Count: launches.length }),
+    )
+  })
+}
+
+async function mockLaunchDetails(page: Page, availableSeats: number) {
+  await page.route('**/api/launches/launch-1', async (route) => {
+    await route.fulfill(
+      apiResponse({ ...launch({ availableSeats }), bookedSeats: 10 - availableSeats }),
+    )
+  })
+}
+
+async function mockBooking(page: Page, body: unknown, status: number) {
+  await page.route('**/api/bookings', async (route) => {
+    await route.fulfill(apiResponse(body, status))
   })
 }
 
@@ -66,11 +84,7 @@ test.describe('launch catalogue', () => {
         return
       }
 
-      await route.fulfill({
-        status: 200,
-        contentType: 'application/json',
-        body: JSON.stringify({ value: [launch()], Count: 1 }),
-      })
+      await route.fulfill(apiResponse({ value: [launch()], Count: 1 }))
     })
     await page.goto('/')
 
@@ -79,5 +93,44 @@ test.describe('launch catalogue', () => {
     ).toBeVisible()
     await page.getByRole('button', { name: 'Try again' }).click()
     await expect(page.getByText('Test Falcon')).toBeVisible()
+  })
+
+  test('validates and submits a seat booking', async ({ page }) => {
+    await mockLaunches(page, [launch({ availableSeats: 3 })])
+    await mockLaunchDetails(page, 3)
+    await mockBooking(
+      page,
+      {
+        id: 'booking-1',
+        status: 'pending',
+        paymentStatus: 'pending',
+        launchId: 'launch-1',
+        seatCount: 2,
+      },
+      201,
+    )
+    await page.goto('/launches/launch-1')
+    await expect(page.getByLabel('Number of seats')).toBeVisible()
+    await page.getByLabel('Number of seats').fill('4')
+    await page.getByRole('button', { name: 'Book seats' }).click()
+    await expect(page.getByText('Only 3 seats are currently available.')).toBeVisible()
+    await page.getByLabel('Number of seats').fill('2')
+    await page.getByRole('button', { name: 'Book seats' }).click()
+    await expect(page.getByText('Booking accepted')).toBeVisible()
+    await expect(page.getByText('Status: pending')).toBeVisible()
+  })
+
+  test('shows an API availability rejection', async ({ page }) => {
+    await mockLaunches(page, [launch({ availableSeats: 3 })])
+    await mockLaunchDetails(page, 3)
+    await mockBooking(
+      page,
+      { error: 'Insufficient seats available' },
+      400,
+    )
+    await page.goto('/launches/launch-1')
+    await page.getByLabel('Number of seats').fill('2')
+    await page.getByRole('button', { name: 'Book seats' }).click()
+    await expect(page.getByText('Insufficient seats available')).toBeVisible()
   })
 })

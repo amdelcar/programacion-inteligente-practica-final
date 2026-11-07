@@ -26,8 +26,12 @@ la navegación, Pico.css para los estilos base, Tailwind CSS para utilidades,
 Vitest para pruebas unitarias y Playwright para pruebas end-to-end.
 
 La primera entrega incluye el catálogo de lanzamientos, navegación entre las
-secciones principales, estados de carga/error/vacío y una interfaz responsive
-con tabla de lanzamientos.
+secciones principales, estados de carga/error/vacío, una interfaz responsive
+con tabla de lanzamientos y reserva de plazas.
+
+La reserva valida la disponibilidad, crea la reserva mediante la API y muestra
+su estado. El flujo usa el cliente de prueba
+`test.customer@astrobookings.local` mientras no exista autenticación.
 
 ### Desarrollo
 

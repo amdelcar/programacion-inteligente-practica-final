@@ -25,3 +25,11 @@
   seat availability.
 - Added loading, empty, API error, retry, and fully booked states.
 - Added unit and Playwright coverage for catalogue behavior.
+
+### Seat booking
+
+- Added seat quantity validation against current launch availability.
+- Added booking submission through `POST /api/bookings`.
+- Added pending, success, and API rejection states.
+- Added query invalidation to refresh launch availability after booking.
+- Added unit and Playwright coverage for booking validation and API conflicts.
