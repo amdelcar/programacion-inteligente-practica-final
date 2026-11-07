@@ -6,14 +6,18 @@ export function AppLayout() {
       <header className="site-header">
         <div>
           <p className="eyebrow">ASTROBOOKINGS CLIENT</p>
-          <h1>Choose your next launch</h1>
+          <h1>Plan your next journey</h1>
           <p className="intro">
             Explore missions and reserve seats through the AstroBookings API.
           </p>
         </div>
         <nav aria-label="Main navigation">
-          <NavLink to="/">Launches</NavLink>
-          <NavLink to="/bookings">My bookings</NavLink>
+          <NavLink className="nav-button" to="/" end>
+            Launches
+          </NavLink>
+          <NavLink className="nav-button" to="/bookings">
+            My bookings
+          </NavLink>
         </nav>
       </header>
       <Outlet />

@@ -35,29 +35,47 @@ export function LaunchCataloguePage() {
         <Feedback message="No launches are available right now." />
       )}
       {launchesQuery.isSuccess && launchesQuery.data.length > 0 && (
-        <div className="launch-grid">
-          {launchesQuery.data.map((launch) => (
-            <article className="launch-card" key={launch.id}>
-              <div className="card-topline">
-                <span className="launch-status">{launch.status}</span>
-                <span>{formatDate(launch.scheduledDate)}</span>
-              </div>
-              <h3>{launch.rocketName}</h3>
-              <dl className="launch-details">
-                <div>
-                  <dt>Price</dt>
-                  <dd>{formatPrice(launch.price)}</dd>
-                </div>
-                <div>
-                  <dt>Seats available</dt>
-                  <dd>{launch.availableSeats}</dd>
-                </div>
-              </dl>
-              <Link className="card-action" to={`/launches/${launch.id}`}>
-                View launch
-              </Link>
-            </article>
-          ))}
+        <div className="table-container">
+          <table className="launch-table">
+            <caption className="visually-hidden">Available rocket launches</caption>
+            <thead>
+              <tr>
+                <th scope="col">Mission</th>
+                <th scope="col">Date</th>
+                <th scope="col">Status</th>
+                <th scope="col">Price</th>
+                <th scope="col">Availability</th>
+                <th scope="col"><span className="visually-hidden">Actions</span></th>
+              </tr>
+            </thead>
+            <tbody>
+              {launchesQuery.data.map((launch) => (
+                <tr key={launch.id}>
+                  <th scope="row">
+                    <span className="mission-name">{launch.rocketName}</span>
+                    <span className="mission-id">ID {launch.id}</span>
+                  </th>
+                  <td>{formatDate(launch.scheduledDate)}</td>
+                  <td>
+                    <span className={`launch-status launch-status-${launch.status}`}>
+                      <span className="status-dot" aria-hidden="true" />
+                      {launch.status}
+                    </span>
+                  </td>
+                  <td className="table-number">{formatPrice(launch.price)}</td>
+                  <td>
+                    <span className="availability-count">{launch.availableSeats}</span>
+                    <span className="availability-label"> seats</span>
+                  </td>
+                  <td className="table-action">
+                    <Link className="card-action" to={`/launches/${launch.id}`}>
+                      View details
+                    </Link>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       )}
     </section>
