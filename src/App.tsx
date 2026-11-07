@@ -15,8 +15,14 @@ export function App() {
         <Route index element={<LaunchCataloguePage />} />
         <Route path="launches/:launchId" element={<BookingFlowPage />} />
         <Route path="bookings" element={<BookingHistoryPage />} />
-        <Route path="bookings/:bookingId" element={<BookingConfirmationPage />} />
-        <Route path="booking/confirmation" element={<BookingConfirmationPage />} />
+        <Route
+          path="bookings/:bookingId"
+          element={<BookingConfirmationPage />}
+        />
+        <Route
+          path="booking/confirmation"
+          element={<BookingConfirmationPage />}
+        />
         <Route path="not-found" element={<NotFoundPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Route>

@@ -1,9 +1,10 @@
 import type { LaunchWithAvailability } from '../types/astrobookings'
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? ''
+const LAUNCHES_ENDPOINT = `${API_BASE_URL}/api/launches`
 
 export async function getLaunches(): Promise<LaunchWithAvailability[]> {
-  const response = await fetch(`${API_BASE_URL}/api/launches`)
+  const response = await fetch(LAUNCHES_ENDPOINT)
 
   if (!response.ok) {
     throw new Error(`AstroBookings API returned ${response.status}`)

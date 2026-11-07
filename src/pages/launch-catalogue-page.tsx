@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { getLaunches } from '../api/astrobookings-api'
 import { Feedback } from '../components/feedback'
 import { hasAvailableSeats } from '../features/launches/launch-availability'
+import type { LaunchWithAvailability } from '../types/astrobookings'
 
 export function LaunchCataloguePage() {
   const launchesQuery = useQuery({
@@ -52,44 +53,60 @@ export function LaunchCataloguePage() {
             </thead>
             <tbody>
               {launchesQuery.data.map((launch) => (
-                <tr key={launch.id}>
-                  <th scope="row">
-                    <span className="mission-name">{launch.rocketName}</span>
-                    <span className="mission-id">ID {launch.id}</span>
-                  </th>
-                  <td>{formatDate(launch.scheduledDate)}</td>
-                  <td>
-                    <span className={`launch-status launch-status-${launch.status}`}>
-                      <span className="status-dot" aria-hidden="true" />
-                      {launch.status}
-                    </span>
-                  </td>
-                  <td className="table-number">{formatPrice(launch.price)}</td>
-                  <td>
-                    <span className={`availability-badge ${hasAvailableSeats(launch) ? 'availability-open' : 'availability-full'}`}>
-                      {hasAvailableSeats(launch) ? 'Available' : 'Unavailable'}
-                    </span>
-                    <span className="availability-count">{launch.availableSeats}</span>
-                    <span className="availability-label"> seats</span>
-                  </td>
-                  <td className="table-action">
-                    {hasAvailableSeats(launch) ? (
-                      <Link className="card-action" to={`/launches/${launch.id}`}>
-                        View details
-                      </Link>
-                    ) : (
-                      <span className="card-action card-action-disabled" aria-disabled="true">
-                        Fully booked
-                      </span>
-                    )}
-                  </td>
-                </tr>
+                <LaunchRow key={launch.id} launch={launch} />
               ))}
             </tbody>
           </table>
         </div>
       )}
     </section>
+  )
+}
+
+interface LaunchRowProps {
+  launch: LaunchWithAvailability
+}
+
+function LaunchRow({ launch }: LaunchRowProps) {
+  const isAvailable = hasAvailableSeats(launch)
+
+  return (
+    <tr>
+      <th scope="row">
+        <span className="mission-name">{launch.rocketName}</span>
+        <span className="mission-id">ID {launch.id}</span>
+      </th>
+      <td>{formatDate(launch.scheduledDate)}</td>
+      <td>
+        <span className={`launch-status launch-status-${launch.status}`}>
+          <span className="status-dot" aria-hidden="true" />
+          {launch.status}
+        </span>
+      </td>
+      <td className="table-number">{formatPrice(launch.price)}</td>
+      <td>
+        <span
+          className={`availability-badge ${
+            isAvailable ? 'availability-open' : 'availability-full'
+          }`}
+        >
+          {isAvailable ? 'Available' : 'Unavailable'}
+        </span>
+        <span className="availability-count">{launch.availableSeats}</span>
+        <span className="availability-label"> seats</span>
+      </td>
+      <td className="table-action">
+        {isAvailable ? (
+          <Link className="card-action" to={`/launches/${launch.id}`}>
+            View details
+          </Link>
+        ) : (
+          <span className="card-action card-action-disabled" aria-disabled="true">
+            Fully booked
+          </span>
+        )}
+      </td>
+    </tr>
   )
 }
 
