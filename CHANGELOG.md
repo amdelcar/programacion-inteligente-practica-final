@@ -18,3 +18,10 @@
 
 - Configurable API base URL through `VITE_API_BASE_URL`.
 - Vite development proxy for the local API at `http://localhost:3000`.
+
+### Launch catalogue
+
+- Added the API-backed launch catalogue with rocket, date, status, price, and
+  seat availability.
+- Added loading, empty, API error, retry, and fully booked states.
+- Added unit and Playwright coverage for catalogue behavior.
